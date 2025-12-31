@@ -21,13 +21,13 @@ import foto8 from "../assets/foto8.jpg";
 
 // --- CONFIGURACIÓN DE LA GALERÍA TENDEDERO ---
 const datosGaleriaIniciales = [
-  { img: foto1, titulo: "Estudio de la forma nº1" },
-  { img: foto2, titulo: "Vínculos rotos" },
-  { img: foto3, titulo: "La espera en la jungla" },
-  { img: foto5, titulo: "Retrato del tiempo" },
-  { img: foto6, titulo: "La calidez del sonido" },
-  { img: foto7, titulo: "El taller del alquimista" },
-  { img: foto8, titulo: "Diálogo nocturno" }
+  { img: foto1, titulo: "Form Study No. 1" },
+  { img: foto2, titulo: "Broken Bonds" },
+  { img: foto3, titulo: "Waiting in the Jungle" },
+  { img: foto5, titulo: "Portrait of Time" },
+  { img: foto6, titulo: "The Warmth of Sound" },
+  { img: foto7, titulo: "The Alchemist's Workshop" },
+  { img: foto8, titulo: "Night Dialogue" }
 ];
 
 // Desordenamos aleatoriamente
@@ -76,21 +76,21 @@ const work = await Promise.all(
       <section>
         <article class="mt-2 space-y-6">
           <p class="animate text-3xl font-serif leading-relaxed text-white font-medium">
-            Artista visual, fotógrafo e investigador sobre los 
+            Visual artist, photographer and researcher on 
             <span class="bg-white text-black px-2 py-0.5 rounded-sm">
-              vínculos emocionales
+              emotional ties
             </span>, 
-            la norma humana y esa experiencia que nos hace formar parte de una 
+            human norms and that experience that makes us part of a 
             <span class="bg-white text-black px-2 py-0.5 rounded-sm">
-              jungla cívica
+              civic jungle
             </span>, 
-            llamada sociedad.
+            called society.
           </p>
 
           <div class="animate">
             <a href={`mailto:${SITE.EMAIL}`} 
                class="group flex w-fit items-center gap-2 text-white/70 hover:text-white transition-colors duration-300">
-              <span class="text-lg">Contactar</span>
+              <span class="text-lg">Contact</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
@@ -104,7 +104,7 @@ const work = await Promise.all(
 
   <div class="w-full overflow-hidden py-24 my-8 relative group-slider cursor-none" id="section-tendedero">
       
-      <div id="drag-cursor" class="pointer-events-none fixed z-50 px-3 py-1 bg-white text-black text-xs font-bold  tracking-widest rounded-full opacity-0 transition-opacity duration-200 transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference">
+      <div id="drag-cursor" class="pointer-events-none fixed z-50 hidden md:flex items-center justify-center w-16 h-16 bg-white text-black text-[10px] font-bold uppercase tracking-widest rounded-full opacity-0 transition-opacity duration-200 transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference">
         Drag
       </div>
 
@@ -124,7 +124,7 @@ const work = await Promise.all(
                    <div class="aspect-[4/3] overflow-hidden relative border border-white/5 bg-neutral-900">
                       <Image 
                         src={item.img}
-                        alt={`Hoja de contacto: ${item.titulo}`}
+                        alt={`Contact sheet: ${item.titulo}`}
                         class="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 ease-out opacity-90 group-hover:opacity-100 pointer-events-none"
                         width={400} 
                         format="webp"
@@ -146,19 +146,19 @@ const work = await Promise.all(
       <section class="animate grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
         <div class="space-y-6">
           <h5 class="font-serif text-3xl text-white font-medium leading-tight">
-            El deseo de cambiar algo, sin encontrarlo. 
+            The desire to change something, without finding it. 
             <span class="bg-white text-black px-2 py-0.5 rounded-sm decoration-clone">
-            El deseo de ser, sin ser.
+            The desire to be, without being.
             </span>
           </h5>
           <p class="text-gray-300 leading-relaxed">
-            Cada imagen es un fragmento de una conversación silenciosa. En mi proceso creativo, busco deconstruir lo cotidiano para encontrar la poesía oculta en las estructuras urbanas y humanas.
+            Each image is a fragment of a silent conversation. In my creative process, I seek to deconstruct the everyday to find the hidden poetry in urban and human structures.
           </p>
         </div>
         <div class="aspect-square overflow-hidden rounded-sm bg-neutral-900 relative group border border-white/10">
            <Image 
              src={foto4} 
-             alt="Sobre mí"
+             alt="About me"
              class="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 ease-out group-hover:scale-105"
              width={600} 
              format="webp"
@@ -170,8 +170,8 @@ const work = await Promise.all(
 
       <section class="animate space-y-8">
         <div class="flex items-end justify-between">
-            <h5 class="font-serif text-2xl text-white font-medium">Selected Works</h5>
-            <span class="text-sm text-white/40 font-mono hidden md:block">FEATURED</span>
+            <h5 class="font-serif text-3xl text-white font-medium">Selected Works</h5>
+          
         </div>
 
         <div class="columns-1 md:columns-2 gap-4 space-y-4">
@@ -182,7 +182,7 @@ const work = await Promise.all(
                             {project.data.title}
                         </span>
                         <span class="text-white/60 text-sm font-sans uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-700 delay-75">
-                            Ver Proyecto
+                            View Project
                         </span>
                     </div>
                     <Image 
@@ -200,7 +200,7 @@ const work = await Promise.all(
       <div class="animate border-t border-white/20"></div>
 
       <section class="animate space-y-6">
-        <h5 class="font-semibold text-white/50 uppercase tracking-widest text-sm mb-4">Artist Statement</h5>
+      
         
         <article class="max-w-4xl">
           <p class="text-2xl md:text-3xl font-serif leading-relaxed text-white font-medium">
@@ -208,7 +208,7 @@ const work = await Promise.all(
             <span class="bg-white text-black px-2 py-0.5 rounded-sm decoration-clone">
               death and constant rebirth
             </span> 
-            in search of self-knowledge and exploration of the vast world that surrounds us with the in order to understand it. 
+            in search of self-knowledge and exploration of the vast world that surrounds us in order to understand it. 
             <br><br>
             For years I have been interested in topics such as 
             <span class="bg-white text-black px-2 py-0.5 rounded-sm decoration-clone">
@@ -299,7 +299,7 @@ const work = await Promise.all(
       slider.scrollLeft = scrollLeft - walk;
     });
 
-    // === LÓGICA DEL CURSOR "Drag" ===
+    // === LÓGICA DEL CURSOR "DRAG" ===
     const sectionTendedero = document.getElementById('section-tendedero');
     const dragCursor = document.getElementById('drag-cursor');
 
