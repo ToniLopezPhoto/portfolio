@@ -11,4 +11,14 @@ Sr. Wind is an immersive experience in which the poetry of the writer Juan José
 ----
 
 
-Esto es un test
+![[../../assets/foto1.jpg]]
+
+
+
+
+![[../../assets/foto2.jpg]][[
+
+
+
+
+![[../../assets/foto3.jpg]]
