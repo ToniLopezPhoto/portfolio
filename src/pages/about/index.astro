@@ -1,0 +1,32 @@
+---
+import { getEntry } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+
+// 1. Buscamos la nota específica "about" en la colección "pages"
+const entry = await getEntry("pages", "about");
+
+// Seguridad: Si no existe la nota, avisamos en la consola en vez de romper la web
+if (!entry) {
+  throw new Error("❌ ERROR: No encuentro el archivo src/content/pages/about.md");
+}
+
+// 2. Renderizamos el contenido
+const { Content } = await entry.render();
+---
+
+<PageLayout title={entry.data.title} description={entry.data.description || "About me"}>
+  <Container>
+    <div class="space-y-10">
+      
+      <div class="animate font-semibold text-black dark:text-white text-3xl font-serif">
+        {entry.data.title}
+      </div>
+
+      <article class="animate prose dark:prose-invert max-w-none leading-relaxed text-gray-300">
+        <Content />
+      </article>
+
+    </div>
+  </Container>
+</PageLayout>

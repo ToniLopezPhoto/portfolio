@@ -1,7 +1,7 @@
 ---
 title: Pepe Yagües
 description: Retratos para el artista murcia Pepe Yagües
-date: Mar 26 2024
+date: Mar 26 2021
 heroImage: "@/assets/Pepe_Yagues-2.jpg"
 ---
 

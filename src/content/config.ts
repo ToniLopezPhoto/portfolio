@@ -1,38 +1,39 @@
 import { defineCollection, z } from "astro:content";
 
+// 1. BLOG
 const blog = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
     description: z.string(),
     date: z.coerce.date(),
-    draft: z.boolean().optional()
+    draft: z.boolean().optional(),
   }),
 });
 
-const work = defineCollection({
-  type: "content",
-  schema: z.object({
-    company: z.string(),
-    role: z.string(),
-    dateStart: z.coerce.date(),
-    dateEnd: z.union([z.coerce.date(), z.string()]),
-  }),
-});
-
+// 2. PROYECTOS (AQUÍ ESTÁ EL CAMBIO IMPORTANTE)
 const projects = defineCollection({
   type: "content",
-  schema: ({ image }) => z.object({ // <--- Añadimos { image } aquí
+  // Ahora pasamos ({ image }) como argumento aquí vvv
+  schema: ({ image }) => z.object({
     title: z.string(),
     description: z.string(),
     date: z.coerce.date(),
     draft: z.boolean().optional(),
     demoURL: z.string().optional(),
     repoURL: z.string().optional(),
-    
-    // CAMBIO IMPORTANTE: Ahora usamos image()
+    // Cambiamos z.string() por image()
     heroImage: image().optional(), 
   }),
 });
 
-export const collections = { blog, work, projects };
+// 3. PÁGINAS (About)
+const pages = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+  }),
+});
+
+export const collections = { blog, projects, pages };
