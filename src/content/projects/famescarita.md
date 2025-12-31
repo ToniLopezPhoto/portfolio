@@ -8,3 +8,13 @@ heroImage: "@/assets/fames.jpg"
 
 “Hunger, rejection, love and dependent bonds, not all human relationships are healthy and not all people should have the power to harm us. In this way «Fames.Carita» is a journey towards acceptance, healing and knowledge of what and why it hurts … «
 
+![Boceto inicial](@assets/fames.jpg)
+
+
+
+![Boceto inicial](@assets/lux.jpg)
+
+
+
+
+![Boceto inicial](@assets/fam.jpg)
