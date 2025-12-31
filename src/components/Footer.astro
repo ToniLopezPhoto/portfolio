@@ -1,0 +1,19 @@
+---
+import Container from "@components/Container.astro";
+import { SITE } from "@consts";
+import BackToTop from "@components/BackToTop.astro";
+---
+
+<footer class="animate">
+  <Container>
+    <div class="flex justify-between items-center py-4">
+      
+      <div class="text-white/40">
+        &copy; {new Date().getFullYear()} {`|`} {SITE.NAME}
+      </div>
+
+      <BackToTop />
+      
+    </div>
+  </Container>
+</footer>

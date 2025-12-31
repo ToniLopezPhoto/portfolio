@@ -1,0 +1,8 @@
+---
+company: "Toni López"
+role: "Por: Juan José Hernandez Sales"
+dateStart: "01/01/2020"
+dateEnd: "11/27/2022"
+---
+
+Antonio López Pérez, better known in the artistic world, as Toni López, was born on July 17, 1995, in Molina de Segura, Murcia. From his youth he felt an interest in the various varieties in which Art, with a capital A, manifests itself in our society. Following that call of the unknown, he did not hesitate to direct his entire life and interests in achieving a dream that most consider impossible. He began his academic stage, starting with a bachelor’s degree in plastic and graphic arts, entering the Murcia School of Art, where he would study the degree of higher technician in artistic photography and lighting. He is currently a student at the international school Too Many Flash, doing a master’s degree in photography and post-production, specializing in author photography. Toni López has participated in various exhibitions, from This is Murcia, organized by the University of Fine Arts of Murcia, to the PARALLAX art fair, held with the representation of Gaudí gallery in London. At the national level, he has participated in several exhibitions in cities such as Madrid and Barcelona. Currently, the works of Toni López can be seen in the Gaudí and Montsequi galleries, and internationally at the U * Space Gallery in New York. There are several awards and selections that he has achieved in his career, CreArte (2018); various mentions in Fotoresvista Argentina; and an international scholarship. Other of his projects are publications in magazines, such as Negromundo, and a publication of Fanzine Digital, in Leptis Editorial.
