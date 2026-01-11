@@ -4,6 +4,7 @@ description: Get started writing content in markdown.
 date: Mar 17 2024
 feature: Proyectos/Web portfolio Obsidian + Astro/portfolio/src/content/blog/05-markdown-syntax/spongebob.webp
 thumbnail: +/Adjuntos/thumbnails/resized/62fd09fc804f8534f14243183a7a9751_86cf658e.webp
+draft: true
 ---
 
 ---

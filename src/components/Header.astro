@@ -13,19 +13,15 @@ import { SITE } from "@consts";
         </div>
       </Link>
       <nav class="flex gap-1">
-        <Link href="/blog">
+        <Link href="/blog" underline={false}>
           blog
         </Link>
-        <span>
-          {`/`}
-        </span>
-        <Link href="/about">
+        <span>,</span>
+        <Link href="/about" underline={false}>
           About
         </Link>
-        <span>
-          {`/`}
-        </span>
-        <Link href="/projects">
+        <span>,</span>
+        <Link href="/projects" underline={false}>
           projects
         </Link>
       </nav>

@@ -24,6 +24,7 @@ const projects = defineCollection({
     repoURL: z.string().optional(),
     // Cambiamos z.string() por image()
     heroImage: image().optional(), 
+    featured: z.boolean().optional().default(false),
   }),
 });
 

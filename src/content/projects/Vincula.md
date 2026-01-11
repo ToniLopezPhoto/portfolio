@@ -1,8 +1,9 @@
 ---
 title: Vincula
-description: Hunger, rejection, love and dependent bonds
-date: Mar 26 2024
+description: Not all prisons have bars…. There are deeper prisons, where not knowing prevents wanting.
+date: Mar 26 2020
 heroImage: "@/assets/vincula.jpg"
+featured: true
 ---
 
 

@@ -21,7 +21,7 @@ import foto8 from "../assets/foto8.jpg";
 
 // --- CONFIGURACIÓN DE LA GALERÍA TENDEDERO ---
 const datosGaleriaIniciales = [
-  { img: foto1, titulo: "Form Study No. 1" },
+  { img: foto1, titulo: "Memory Study No. 1" },
   { img: foto2, titulo: "Broken Bonds" },
   { img: foto3, titulo: "Waiting in the Jungle" },
   { img: foto5, titulo: "Portrait of Time" },
@@ -51,10 +51,11 @@ const blog = (await getCollection("blog"))
   .slice(0,SITE.NUM_POSTS_ON_HOMEPAGE);
 
 // 2. PROYECTOS PARA LA GALERÍA MASONRY (SELECTED WORKS)
+// MODIFICADO: Filtra solo los que tienen featured: true
 const masonryProjects = (await getCollection("projects"))
-  .filter(project => !project.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 6); 
+  .filter(project => !project.data.draft && project.data.featured === true)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  // He quitado el .slice(0, 6) para que salgan todos los que marques
 
 // 3. WORK (Oculto pero cargado)
 const allwork = (await getCollection("work"))
@@ -76,20 +77,24 @@ const work = await Promise.all(
       <section>
         <article class="mt-2 space-y-6">
           <p class="animate text-3xl font-serif leading-relaxed text-white font-medium">
-            Visual artist, photographer and researcher on 
-            <span class="bg-white text-black px-2 py-0.5 rounded-sm">
-              emotional ties
-            </span>, 
-            human norms and that experience that makes us part of a 
-            <span class="bg-white text-black px-2 py-0.5 rounded-sm">
-              civic jungle
-            </span>, 
-            called society.
+           Visual artist exploring 
+            <span class="bg-white text-black px-0 py-0.5 rounded-sm">
+             the civic jungle.
+            </span> 
+            I use photography to find meaning,
+            <span class="bg-white text-black px-0 py-0.5 rounded-sm">
+               human values
+            </span>
+            ,and the emotional ties that bind us.
           </p>
 
           <div class="animate">
-            <a href={`mailto:${SITE.EMAIL}`} 
-               class="group flex w-fit items-center gap-2 text-white/70 hover:text-white transition-colors duration-300">
+            <a 
+              href={`mailto:${SITE.EMAIL}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex w-fit items-center gap-2 text-white/70 hover:text-white transition-colors duration-300"
+            >
               <span class="text-lg">Contact</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -237,31 +242,30 @@ const work = await Promise.all(
         </ul>
       </section>
 
-<div class="animate border-t border-white/20"></div>
+      <div class="animate border-t border-white/20"></div>
 
       <section class="animate space-y-4">
         <h5 class="font-semibold text-white">Let's Connect</h5>
         <article>
           <p class="text-gray-300">
             If you want to get in touch with me about something or just to say hi,
-            reach out on social media or send me an email.
+            reach out via email.
           </p>
         </article>
-        <ul class="flex flex-wrap gap-2">
-          {SOCIALS.map(SOCIAL => (
-            <li class="flex gap-x-2 text-nowrap">
-              <Link href={SOCIAL.HREF} external aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}>
-                {SOCIAL.NAME}
-              </Link>
-              {"/"}
-            </li>
-          ))}
-          <li class="line-clamp-1">
-            <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`}>
-              {SITE.EMAIL}
-            </Link>
-          </li>
-        </ul>
+        <div class="animate">
+          <a 
+            href={`mailto:${SITE.EMAIL}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group flex w-fit items-center gap-2 text-white/70 hover:text-white transition-colors duration-300"
+          >
+            <span class="text-lg">Contact</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
       </section>
     </div>
   </Container>
@@ -273,57 +277,89 @@ const work = await Promise.all(
     .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 
-  <script is:inline>
-    // === LÓGICA DEL SLIDER DRAG ===
-    const slider = document.getElementById('slider-tendedero');
-    let isDown = false;
-    let startX;
-    let scrollLeft;
+ <script is:inline>
+    // Envolvemos todo en una función para poder llamarla cuando queramos
+    function initSlider() {
+      // 1. Buscamos los elementos
+      const slider = document.getElementById('slider-tendedero');
+      const sectionTendedero = document.getElementById('section-tendedero');
+      const dragCursor = document.getElementById('drag-cursor');
 
-    slider.addEventListener('mousedown', (e) => {
-      isDown = true;
-      slider.classList.add('active'); 
-      startX = e.pageX - slider.offsetLeft;
-      scrollLeft = slider.scrollLeft;
-    });
+      // SI NO EXISTE EL SLIDER (porque estamos en otra página), SALIMOS
+      // Esto evita errores en consola si navegas a una página sin slider.
+      if (!slider || !sectionTendedero || !dragCursor) return;
 
-    slider.addEventListener('mouseleave', () => {
-      isDown = false;
-      slider.classList.remove('active');
-    });
+      // === LÓGICA DEL SLIDER DRAG ===
+      let isDown = false;
+      let startX;
+      let scrollLeft;
 
-    slider.addEventListener('mouseup', () => {
-      isDown = false;
-      slider.classList.remove('active');
-    });
+      // Limpiamos eventos previos por seguridad (opcional pero recomendable)
+      // Aunque al cambiar de página el nodo DOM es nuevo, así que no es estrictamente necesario.
 
-    slider.addEventListener('mousemove', (e) => {
-      if(!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startX) * 2;
-      slider.scrollLeft = scrollLeft - walk;
-    });
+      const onMouseDown = (e) => {
+        isDown = true;
+        slider.classList.add('active'); 
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+      };
 
-    // === LÓGICA DEL CURSOR "DRAG" ===
-    const sectionTendedero = document.getElementById('section-tendedero');
-    const dragCursor = document.getElementById('drag-cursor');
-
-    // Mover el cursor con el ratón
-    sectionTendedero.addEventListener('mousemove', (e) => {
-        dragCursor.style.left = e.clientX + 'px';
-        dragCursor.style.top = e.clientY + 'px';
-    });
-
-    // Mostrar cursor al entrar
-    sectionTendedero.addEventListener('mouseenter', () => {
-        dragCursor.classList.remove('opacity-0');
-    });
-
-    // Ocultar cursor al salir
-    sectionTendedero.addEventListener('mouseleave', () => {
+      const onMouseLeave = () => {
+        isDown = false;
+        slider.classList.remove('active');
+        // También ocultamos el cursor aquí por si acaso sale rápido
         dragCursor.classList.add('opacity-0');
-    });
+      };
+
+      const onMouseUp = () => {
+        isDown = false;
+        slider.classList.remove('active');
+      };
+
+      const onMouseMove = (e) => {
+        if(!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2;
+        slider.scrollLeft = scrollLeft - walk;
+      };
+
+      // Asignamos los eventos al Slider
+      slider.addEventListener('mousedown', onMouseDown);
+      slider.addEventListener('mouseleave', onMouseLeave); // Este maneja el slider
+      slider.addEventListener('mouseup', onMouseUp);
+      slider.addEventListener('mousemove', onMouseMove);
+
+      // === LÓGICA DEL CURSOR "DRAG" ===
+      
+      // Mover el cursor con el ratón
+      const onSectionMove = (e) => {
+          dragCursor.style.left = e.clientX + 'px';
+          dragCursor.style.top = e.clientY + 'px';
+      };
+
+      // Mostrar cursor al entrar
+      const onSectionEnter = () => {
+          dragCursor.classList.remove('opacity-0');
+      };
+
+      // Ocultar cursor al salir (Específico de la sección)
+      const onSectionLeave = () => {
+          dragCursor.classList.add('opacity-0');
+      };
+
+      sectionTendedero.addEventListener('mousemove', onSectionMove);
+      sectionTendedero.addEventListener('mouseenter', onSectionEnter);
+      sectionTendedero.addEventListener('mouseleave', onSectionLeave);
+    }
+
+    // EJECUTAMOS LA LÓGICA:
+    
+    // 1. Cuando la página carga por primera vez
+    initSlider();
+
+    // 2. IMPORTANTE: Cuando Astro navega y cambia el contenido (View Transitions)
+    document.addEventListener('astro:page-load', initSlider);
   </script>
 
 </PageLayout>

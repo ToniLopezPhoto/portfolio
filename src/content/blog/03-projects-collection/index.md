@@ -1,7 +1,8 @@
 ---
-title: "Projects Collection"
-description: "How to add projects to your portfolio."
-date: "Mar 20 2024"
+title: Projects Collection
+description: How to add projects to your portfolio.
+date: Mar 20 2024
+draft: true
 ---
 
 The `projects` collections is found in `src/content/projects`.
