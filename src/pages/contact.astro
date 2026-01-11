@@ -1,0 +1,176 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+---
+
+<PageLayout title="Contact" description="Get in touch with me for collaborations, exhibitions, or inquiries about my work.">
+  <Container>
+    <div class="space-y-10 py-12">
+      
+      <div class="animate">
+        <h1 class="font-serif text-5xl text-white font-medium mb-4">Let's Connect</h1>
+        <p class="text-gray-300 text-lg max-w-2xl">
+          Whether you're interested in collaborations, exhibitions, print sales, or simply want to discuss photography and art, I'd love to hear from you.
+        </p>
+      </div>
+
+      <div class="animate border-t border-white/20"></div>
+
+      <div class="max-w-2xl">
+        <!-- Mensaje de éxito -->
+        <div id="success-message" class="hidden mb-6 p-4 bg-white/10 border border-white/20 rounded-sm">
+          <p class="text-white font-medium">✓ Message sent successfully!</p>
+          <p class="text-gray-300 text-sm mt-1">Thank you for reaching out. I'll get back to you soon.</p>
+        </div>
+
+        <!-- Mensaje de error -->
+        <div id="error-message" class="hidden mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-sm">
+          <p class="text-red-400 font-medium">✗ Something went wrong</p>
+          <p class="text-gray-300 text-sm mt-1">Please try again or contact me directly via email.</p>
+        </div>
+
+        <form 
+          id="contact-form"
+          class="animate space-y-6"
+        >
+          <!-- Access Key de Web3Forms - Reemplaza con el tuyo -->
+          <input type="hidden" name="access_key" value="4a32b308-38fa-457f-8114-0e96855e0b4c">
+          
+          <!-- Opcional: Campo de redirección (puedes omitirlo si quieres que se quede en la misma página) -->
+          <input type="hidden" name="redirect" value="false">
+
+          <div class="space-y-2">
+            <label for="name" class="block text-white/80 font-medium">Name</label>
+            <input 
+              type="text" 
+              name="name" 
+              id="name"
+              required
+              class="w-full px-4 py-3 bg-neutral-900 border border-white/10 rounded-sm text-white focus:outline-none focus:border-white/30 transition-colors"
+            />
+          </div>
+
+          <div class="space-y-2">
+            <label for="email" class="block text-white/80 font-medium">Email</label>
+            <input 
+              type="email" 
+              name="email" 
+              id="email"
+              required
+              class="w-full px-4 py-3 bg-neutral-900 border border-white/10 rounded-sm text-white focus:outline-none focus:border-white/30 transition-colors"
+            />
+          </div>
+
+          <div class="space-y-2">
+            <label for="subject" class="block text-white/80 font-medium">Subject</label>
+            <input 
+              type="text" 
+              name="subject" 
+              id="subject"
+              required
+              class="w-full px-4 py-3 bg-neutral-900 border border-white/10 rounded-sm text-white focus:outline-none focus:border-white/30 transition-colors"
+            />
+          </div>
+
+          <div class="space-y-2">
+            <label for="message" class="block text-white/80 font-medium">Message</label>
+            <textarea 
+              name="message" 
+              id="message"
+              rows="6"
+              required
+              class="w-full px-4 py-3 bg-neutral-900 border border-white/10 rounded-sm text-white focus:outline-none focus:border-white/30 transition-colors resize-none"
+            ></textarea>
+          </div>
+
+          <!-- Honeypot para evitar spam -->
+          <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+          <button 
+            type="submit"
+            id="submit-btn"
+            class="group flex items-center gap-2 px-6 py-3 bg-white text-black font-medium rounded-sm hover:bg-white/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <span id="btn-text">Send Message</span>
+            <svg id="btn-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+            <svg id="btn-spinner" class="hidden animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          </button>
+        </form>
+      </div>
+
+      
+      </div>
+
+    </div>
+  </Container>
+</PageLayout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const btnText = document.getElementById('btn-text') as HTMLElement;
+  const btnArrow = document.getElementById('btn-arrow') as HTMLElement;
+  const btnSpinner = document.getElementById('btn-spinner') as HTMLElement;
+  const successMessage = document.getElementById('success-message') as HTMLElement;
+  const errorMessage = document.getElementById('error-message') as HTMLElement;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    // Deshabilitar botón y mostrar loading
+    submitBtn.disabled = true;
+    btnText.textContent = 'Sending...';
+    btnArrow.classList.add('hidden');
+    btnSpinner.classList.remove('hidden');
+    
+    // Ocultar mensajes previos
+    successMessage.classList.add('hidden');
+    errorMessage.classList.add('hidden');
+
+    try {
+      const formData = new FormData(form);
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Mostrar mensaje de éxito
+        successMessage.classList.remove('hidden');
+        form.reset();
+        
+        // Scroll suave al mensaje de éxito
+        successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        // Mostrar mensaje de error
+        errorMessage.classList.remove('hidden');
+      }
+    } catch (error) {
+      // Mostrar mensaje de error
+      errorMessage.classList.remove('hidden');
+    } finally {
+      // Restaurar botón
+      submitBtn.disabled = false;
+      btnText.textContent = 'Send Message';
+      btnArrow.classList.remove('hidden');
+      btnSpinner.classList.add('hidden');
+    }
+  });
+</script>
+
+<style>
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+</style>

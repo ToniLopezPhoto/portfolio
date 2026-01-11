@@ -4,15 +4,39 @@ import { SITE } from "@consts";
 import BackToTop from "@components/BackToTop.astro";
 ---
 
-<footer class="animate">
+<footer class="animate border-t border-white/20 mt-24 pt-24">
   <Container>
-    <div class="flex justify-between items-center py-4">
+    <div class="pb-8 space-y-6">
       
-      <div class="text-white/40">
-        &copy; {new Date().getFullYear()} {`|`} {SITE.NAME}
+      <!-- Información de contacto centrada -->
+      <div class="flex justify-between items-start text-sm text-white/60">
+        <div class="space-y-1">
+          <p>
+            <a href="mailto:info@tonilopezphoto.com" class="hover:text-white transition-colors">
+              info@tonilopezphoto.com
+            </a>
+          </p>
+          <p>
+            <a href="https://1kwords.es/" class="hover:text-white transition-colors">
+              Fotografia e-commerce
+            </a>
+          </p>
+          
+        </div>
+
+        <div class="space-y-1 text-right">
+          <p>Based in Murcia, Spain</p>
+          <p>Available for collaborations</p>
+        </div>
       </div>
 
-      <BackToTop />
+      <!-- Copyright y back to top -->
+      <div class="flex justify-between items-center pt-6 border-t border-white/10">
+        <div class="text-white/40 text-sm">
+          &copy; {new Date().getFullYear()} {SITE.NAME}
+        </div>
+        <BackToTop />
+      </div>
       
     </div>
   </Container>
